@@ -135,15 +135,15 @@ def team_balancer(teams, max_dispersion, rates):
                 count_zero+=1
             else:
                 sum_all_rates+= rates[i,j]
-    print(count_zero)
-    print(sum_all_rates)
+    #print(count_zero)
+    #print(sum_all_rates)
 
 
     #количество играющих ролей (не нулевой рейт) и средний рейт
     count_not_zero = (len(rates) * 3) - count_zero
     avg_rate = sum_all_rates / count_not_zero
-    print(count_not_zero)
-    print(avg_rate)
+    #print(count_not_zero)
+    #print(avg_rate)
 
 
     only_tank = []#список номеров игроков только с ролью только танк
@@ -170,13 +170,13 @@ def team_balancer(teams, max_dispersion, rates):
             universal.append(i)
         else:
             pass
-    print(only_tank)
-    print(only_dps)
-    print(only_heal)
-    print(tank_and_dps)
-    print(tank_and_heal)
-    print(dps_and_heal)
-    print(universal)
+    #print(only_tank)
+    #print(only_dps)
+    #print(only_heal)
+    #print(tank_and_dps)
+    #print(tank_and_heal)
+    #print(dps_and_heal)
+    #print(universal)
 
     #массив в котором будут команды (по строкам), значения - номера игроков
     teams_num = np.zeros((teams,5))
@@ -185,16 +185,16 @@ def team_balancer(teams, max_dispersion, rates):
 
     #список из которого будум убирать игроков если их распределили 
     box = list(range(0,players))
-    print(box)
+    #print(box)
 
 
     #скольо нехватает танков если брать из only_tank (сколкьо нужно добрать из тех, у кого роль не только танк)
     deficit_tank = teams - len(only_tank)
     deficit_dps = teams * 2 - len(only_dps)
     deficit_heal = teams * 2 - len(only_heal)
-    print(deficit_tank)
-    print(deficit_dps)
-    print(deficit_heal)
+    #print(deficit_tank)
+    #print(deficit_dps)
+    #print(deficit_heal)
 
 
     #box_tank список игроков у которых 2 или 3 роли и есть танк в роли
@@ -234,9 +234,9 @@ def team_balancer(teams, max_dispersion, rates):
             pass
         i+=1
         
-    print(teams_num)
-    print(teams_rates)
-    print(box)
+    #print(teams_num)
+    #print(teams_rates)
+    #print(box)
 
 
 
@@ -282,16 +282,16 @@ def team_balancer(teams, max_dispersion, rates):
                 count_good+=1
                 good_combo = np.vstack([good_combo, j])
                 
-    print('------------------')           
-    print(count_combinations)
-    print(count_permutations)
-    print(count_good)
-    print(good_combo)
+    #print('------------------')           
+    #print(count_combinations)
+    #print(count_permutations)
+    #print(count_good)
+    #print(good_combo)
     
     
     #удаляем первую строку с нулями которую мы записали при инициализации массива
     good_combo = np.delete(good_combo,(0), axis = 0)
-    print(good_combo)
+    #print(good_combo)
     
     
     #каждая 2,3 и 4 строка избыточна, так как это просто перестановки первой, поэтому в массив good_combo2 собтираем каждую четвертую строку
@@ -303,13 +303,13 @@ def team_balancer(teams, max_dispersion, rates):
         good_combo2 = np.vstack([good_combo2, i])
     #удаляем первую строку с нулями которую записали при инициализации массива
     good_combo2 = np.delete(good_combo2,(0), axis = 0)
-    print(good_combo2)
+    #print(good_combo2)
 
 
     #средний рейтинг распределенных танков
     sum_t = teams_rates.sum(axis = 0)
     avg_t = sum_t[0]/teams
-    print(avg_t)
+    #print(avg_t)
 
 
     #массив с рейтингами в хороших комбинациях
@@ -328,28 +328,28 @@ def team_balancer(teams, max_dispersion, rates):
         
         dh_rates = np.vstack([dh_rates, list_p])   
     dh_rates = np.delete(dh_rates,(0), axis = 0)
-    print(dh_rates)
+    #print(dh_rates)
 
 
     #массив из суммарных рейтингов комбинаций
     sum_dh = dh_rates.sum(axis = 1)
     #sum_dh.transpose()
-    print(sum_dh)
+    #print(sum_dh)
     #средний рейтинг комбинаций
     avg_dh = np.mean(sum_dh)
-    print(avg_dh)
+    #print(avg_dh)
 
 
     #округленная сумма среднего рейтинга танков и среднего рейтинга комбинаций
     avg_team = round(avg_t + avg_dh)
-    print(avg_team)
+    #print(avg_team)
 
     #список суммарных рейтингов ддхх которые нужно подобрать в команды, чтоб баланс сошелся к avg_team
     deficite_dh = []
     for i in range(teams):
         deficite = avg_team - teams_rates[i][0]
         deficite_dh.append(deficite)
-    print(deficite_dh)
+    #print(deficite_dh)
 
 
     #подбираем из списка "хороших" распределений ДДХХ (в которых сошлись роли) возможные комбинации полного распределения игроков
@@ -402,43 +402,43 @@ def team_balancer(teams, max_dispersion, rates):
             dispersion = check_dispersion[-1] - check_dispersion[0]
       
         if dispersion <= max_dispersion: #если разброс рейтингов команд меньше или равен максимально допустимому то выходим из цикла (мы нашли что искали)
-            print(tanks)
-            print(tanks_sort)
-            print('---')
-            print(zzz_sum)
-            print(zzz_sum_sort)
-            print('---')
-            print(check_dispersion)
-            print('YES!!! dispersion: ' + str(dispersion))
+            #print(tanks)
+            #print(tanks_sort)
+            #print('---')
+            #print(zzz_sum)
+            #print(zzz_sum_sort)
+            #print('---')
+            #print(check_dispersion)
+            #print('YES!!! dispersion: ' + str(dispersion))
             break
         else:
             continue
         #-------------------------------------------
         
-    print(avg_team)    
+    #print(avg_team)    
 
 
-    print(teams_num)
-    print('+++')
-    print(teams_rates)
-    print('--------')
+    #print(teams_num)
+    #print('+++')
+    #print(teams_rates)
+    #print('--------')
 
-    print('deficite_dh:')
-    print(deficite_dh)
-    print('zzz_sum:')
-    print(zzz_sum)
-    print('-----')
+    #print('deficite_dh:')
+    #print(deficite_dh)
+    #print('zzz_sum:')
+    #print(zzz_sum)
+    #print('-----')
     array_deficite_dh = np.array(deficite_dh)#deficite_dh у нас список, поэтому переводим в массив чтоб далее отсортировать как массив
 
     sorted_idx_zzz_sum = zzz_sum.argsort()#возвращает массив индексов массива zzz_sum в порядке возростания значений элементов zzz_sum
     sorted_idx_deficite_dh = array_deficite_dh.argsort()#сортируем по возрастанию значения массива array_deficite_dh и возвращаем массив индексов
 
-    print('sorted_idx_deficite_dh:')
-    print(sorted_idx_deficite_dh)
+    #print('sorted_idx_deficite_dh:')
+    #print(sorted_idx_deficite_dh)
 
-    print('sorted_idx_zzz_sum:')
-    print(sorted_idx_zzz_sum)
-    print('----------')
+    #print('sorted_idx_zzz_sum:')
+    #print(sorted_idx_zzz_sum)
+    #print('----------')
 
 
     #заполняем массивы teams_num (массив номеров игроков) и teams_rates (массив рейтингов игроков)
@@ -449,22 +449,22 @@ def team_balancer(teams, max_dispersion, rates):
         ddhh_num = sorted_idx_zzz_sum[i]
         ddhh = list_success[ddhh_num]
         list_rates = zzz_rates[ddhh_num]
-        print(i)
-        print(team_num)
-        print(ddhh)
-        print(list_rates)
-        print('----')
+        #print(i)
+        #print(team_num)
+        #print(ddhh)
+        #print(list_rates)
+        #print('----')
         for j in range(4):
             teams_num[team_num][j+1] = ddhh[j]
             teams_rates[team_num][j+1] = list_rates[j]
 
 
-    print(teams_num)
-    print(teams_rates)
+    #print(teams_num)
+    #print(teams_rates)
 
     #проверяем еще раз что у нас команды получились сбалансированые
     sum_team_rates = teams_rates.sum(axis = 1)
-    print(sum_team_rates)
+    #print(sum_team_rates)
 
     return(teams_num,teams_rates,sum_team_rates)
 
