@@ -1,0 +1,416 @@
+{% extends "base.html" %}
+
+
+
+{% load static %}
+
+
+
+{% block content %}
+
+
+
+{% comment %}
+у этой страницы три состояния:
+1) Выбор количества команд (в теге if not number_teams and not result_teams )
+2) Заполнение информации о игроках (в теге if number_teams and not result_teams)
+3) Получен результат (в теге if result_teams)
+{% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% if not number_teams and not success %}
+
+
+<div class="container text-center">
+
+  <div class="row justify-content-md-center">
+    <div class="col-md-center">
+	<br>
+	<br>
+      <img src="/static/img/zen/{{ zenyatta }}" class="mx-lg-auto img-fluid" alt="" loading="lazy">
+    </div>
+  </div>
+  
+  <div class="row justify-content-md-center">
+
+      <div class="col-md-center">
+      <p><em>"Amid discord, we will find tranquility."</em></p>
+	  <br>
+	  <br>
+	  <br>
+    </div>
+  </div>
+  
+  
+  <div class="row justify-content-md-center">
+
+      <div class="col-md-center">
+  <label for="customRange3" class="form-label">Сколько будет команд?</label>
+  <br>
+  <br>
+     <form class="" method="post">
+	  {% csrf_token %}
+          
+<input type="range" class="form-range w-25" min="2" max="8" step="1" id="customRange3" name="select_number">
+<br>
+<br>
+<button type="submit" class="btn btn-warning mb-3" name="button_111">Далее</button>
+             
+      </form>
+     </div>
+	 	 
+  </div>
+  
+      
+  
+</div>
+
+{% endif %}
+
+
+
+
+
+
+
+{% if number_teams and not success %}
+
+<div class="container text-center">
+
+
+  <div class="row justify-content-md-center">
+    <div class="col-md-center">
+	<br>
+<p class="h4">Укажите имена и рейтинги игроков</p>
+<br>
+    </div>
+  </div>
+  </div>
+  
+
+
+
+<div class="container text-center">
+  
+ 
+  
+  <form class="" method="post" enctype="multipart/form-data">
+	  {% csrf_token %}
+  
+  
+  
+  {% for i in numbers_players %}
+  
+  
+      <div class="row">
+    <div class="col">
+	
+        <div class="input-group">
+		
+  <span class="input-group-text" id="inputGroup-sizing-sm">
+  {% cycle '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' '15' '16' '17' '18' '19' '20' '21' '22' '23' '24' '25' '26' '27' '28' '29' '30' '31' '32' '33' '34' '35' '36' '37' '38' '39' '40' %}
+  </span>
+  
+  <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" placeholder="Name" name="name_{{ i|safe }}">
+  
+  
+  <select class="form-select" aria-label="tank" name="tank_{{ i|safe }}">
+  <option selected value="0">нет</option>
+  <option value="10">Bronze 5 (1000)</option>
+  <option value="11">Bronze 4 (1100)</option>
+  <option value="12">Bronze 3 (1200)</option>
+  <option value="13">Bronze 2 (1300)</option>
+  <option value="14">Bronze 1 (1400)</option>
+  <option value="15">Silver 5 (1500)</option>
+  <option value="16">Silver 4 (1600)</option>
+  <option value="17">Silver 3 (1700)</option>
+  <option value="18">Silver 2 (1800)</option>
+  <option value="19">Silver 1 (1900)</option>
+  <option value="20">Gold 5 (2000)</option>
+  <option value="21">Gold 4 (2100)</option>
+  <option value="22">Gold 3 (2200)</option>
+  <option value="23">Gold 2 (2300)</option>
+  <option value="24">Gold 1 (2400)</option>
+  <option value="25">Platinum 5 (2500)</option>
+  <option value="26">Platinum 4 (2600)</option>
+  <option value="27">Platinum 3 (2700)</option>
+  <option value="28">Platinum 2 (2800)</option>
+  <option value="29">Platinum 1 (2900)</option>
+  <option value="30">Diamond 5 (3000)</option>
+  <option value="31">Diamond 4 (3100)</option>
+  <option value="32">Diamond 3 (3200)</option>
+  <option value="33">Diamond 2 (3300)</option>
+  <option value="34">Diamond 1 (3400)</option>
+  <option value="35">Master 5 (3500)</option>
+  <option value="36">Master 4 (3600)</option>
+  <option value="37">Master 3 (3700)</option>
+  <option value="38">Master 2 (3800)</option>
+  <option value="39">Master 1 (3900)</option>
+  <option value="40">Grossmeister 5 (4000)</option>
+  <option value="41">Grossmeister 4 (4100)</option>
+  <option value="42">Grossmeister 3 (4200)</option>
+  <option value="43">Grossmeister 2 (4300)</option>
+  <option value="44">Grossmeister 1 (4400)</option>
+
+</select>
+
+  <select class="form-select" aria-label="dps" name="dps_{{ i|safe }}">
+  <option selected value="0">нет</option>
+  <option value="10">Bronze 5 (1000)</option>
+  <option value="11">Bronze 4 (1100)</option>
+  <option value="12">Bronze 3 (1200)</option>
+  <option value="13">Bronze 2 (1300)</option>
+  <option value="14">Bronze 1 (1400)</option>
+  <option value="15">Silver 5 (1500)</option>
+  <option value="16">Silver 4 (1600)</option>
+  <option value="17">Silver 3 (1700)</option>
+  <option value="18">Silver 2 (1800)</option>
+  <option value="19">Silver 1 (1900)</option>
+  <option value="20">Gold 5 (2000)</option>
+  <option value="21">Gold 4 (2100)</option>
+  <option value="22">Gold 3 (2200)</option>
+  <option value="23">Gold 2 (2300)</option>
+  <option value="24">Gold 1 (2400)</option>
+  <option value="25">Platinum 5 (2500)</option>
+  <option value="26">Platinum 4 (2600)</option>
+  <option value="27">Platinum 3 (2700)</option>
+  <option value="28">Platinum 2 (2800)</option>
+  <option value="29">Platinum 1 (2900)</option>
+  <option value="30">Diamond 5 (3000)</option>
+  <option value="31">Diamond 4 (3100)</option>
+  <option value="32">Diamond 3 (3200)</option>
+  <option value="33">Diamond 2 (3300)</option>
+  <option value="34">Diamond 1 (3400)</option>
+  <option value="35">Master 5 (3500)</option>
+  <option value="36">Master 4 (3600)</option>
+  <option value="37">Master 3 (3700)</option>
+  <option value="38">Master 2 (3800)</option>
+  <option value="39">Master 1 (3900)</option>
+  <option value="40">Grossmeister 5 (4000)</option>
+  <option value="41">Grossmeister 4 (4100)</option>
+  <option value="42">Grossmeister 3 (4200)</option>
+  <option value="43">Grossmeister 2 (4300)</option>
+  <option value="44">Grossmeister 1 (4400)</option>
+</select>
+
+  <select class="form-select" aria-label="heal" name="heal_{{ i|safe }}">
+  <option selected value="0">нет</option>
+  <option value="10">Bronze 5 (1000)</option>
+  <option value="11">Bronze 4 (1100)</option>
+  <option value="12">Bronze 3 (1200)</option>
+  <option value="13">Bronze 2 (1300)</option>
+  <option value="14">Bronze 1 (1400)</option>
+  <option value="15">Silver 5 (1500)</option>
+  <option value="16">Silver 4 (1600)</option>
+  <option value="17">Silver 3 (1700)</option>
+  <option value="18">Silver 2 (1800)</option>
+  <option value="19">Silver 1 (1900)</option>
+  <option value="20">Gold 5 (2000)</option>
+  <option value="21">Gold 4 (2100)</option>
+  <option value="22">Gold 3 (2200)</option>
+  <option value="23">Gold 2 (2300)</option>
+  <option value="24">Gold 1 (2400)</option>
+  <option value="25">Platinum 5 (2500)</option>
+  <option value="26">Platinum 4 (2600)</option>
+  <option value="27">Platinum 3 (2700)</option>
+  <option value="28">Platinum 2 (2800)</option>
+  <option value="29">Platinum 1 (2900)</option>
+  <option value="30">Diamond 5 (3000)</option>
+  <option value="31">Diamond 4 (3100)</option>
+  <option value="32">Diamond 3 (3200)</option>
+  <option value="33">Diamond 2 (3300)</option>
+  <option value="34">Diamond 1 (3400)</option>
+  <option value="35">Master 5 (3500)</option>
+  <option value="36">Master 4 (3600)</option>
+  <option value="37">Master 3 (3700)</option>
+  <option value="38">Master 2 (3800)</option>
+  <option value="39">Master 1 (3900)</option>
+  <option value="40">Grossmeister 5 (4000)</option>
+  <option value="41">Grossmeister 4 (4100)</option>
+  <option value="42">Grossmeister 3 (4200)</option>
+  <option value="43">Grossmeister 2 (4300)</option>
+  <option value="44">Grossmeister 1 (4400)</option>
+</select>
+
+</div>
+
+    </div>
+
+  </div>
+ 
+<br>
+
+  {% endfor %}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="row">
+  
+          <p class="mt-4">
+          <button class="btn btn-warning mb-3" type="submit" name="button_222">
+            Далее
+          </button>
+        </p>
+      </form>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+	  <br>
+	  <br>
+	  <br>
+    </div>
+  </div>
+
+
+
+ </div>
+  
+{% endif %}
+
+
+
+
+
+
+
+{% if success %}
+
+
+<div class="container text-center">
+
+
+  <div class="row justify-content-md-center">
+    <div class="col-md-center">
+	<br>
+<p class="h4">Команды сбалансированы</p>
+<br>
+    </div>
+  </div>
+
+
+<br>
+<div class="row row-cols-md-4 g-4 justify-content-center">
+
+
+{% for i in matrix %}
+
+
+<div class="col-3">
+<div class="card text-bg-{% cycle 'primary' 'danger' 'success' 'warning' 'info' 'dark' 'secondary' 'light' %} mb-3" style="max-width: 18rem;">
+  <div class="card-header">Команда № {% cycle '1' '2' '3' '4' '5' '6' '7' '8' %}</div>
+  <div class="card-body">
+ <div class="container text-center"> 
+	{% for j in i.0 %}
+		
+
+  <div class="row">
+     <div class="col">
+	 <img src="/static/img/{% cycle 'tank' 'damage' 'damage' 'support' 'support' %}.svg" class="mx-lg-auto img-fluid" alt="" loading="lazy">
+	
+	  
+    </div>
+    <div class="col-6">
+      {{ j.0 }}
+    </div>
+    <div class="col">
+      {{ j.1 }}00
+    </div>
+  </div>
+
+	
+	{% endfor %}
+	</div>
+
+	
+  </div>
+  	<div class="card-footer">
+        <small class="text-body-secondary"> Суммарный рейтинг: {{ i.1 }}00</small>
+      </div>
+  
+</div>
+</div>
+
+
+
+{% endfor %}
+
+
+</div>
+<br>
+<button class="btn btn-warning" type="submit" onClick="window.location.reload();">Хочу другой баланс!</button>
+<br>
+<br>
+
+
+<button class="btn btn-success" type="submit" onclick="history.back();">Назад</button>
+<br>
+<br>
+<a class="btn btn-secondary" href="http://localhost:8030" role="button">В начало</a>
+<br>
+
+<!--
+{{ success }}
+<br>
+{{ teams_num }}
+<br>
+{{ teams_rates }}
+<br>
+{{ sum_team_rates }}
+<br>
+{{ matrix }}
+<br>
+<br>
+-->
+
+
+</div>
+{% endif %} 
+ 
+ 
+ 
+ 
+{% endblock %}
+
+
+{% block scripts %}
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
