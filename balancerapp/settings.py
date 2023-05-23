@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-from .secret import DB_NAME, DB_HOST, DB_USER, DB_PASSWORD, MY_SECRET_KEY, MY_DEBUG, MY_HOSTS, MY_TIME_ZONE
+from .secret import DB_NAME, DB_HOST, DB_USER, DB_PASSWORD, MY_SECRET_KEY, MY_DEBUG, MY_HOSTS, MY_TIME_ZONE, MY_DOMEN_NAME
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +31,7 @@ ALLOWED_HOSTS = MY_HOSTS
 
 
 # Application definition
+CSRF_TRUSTED_ORIGINS = MY_DOMEN_NAME
 
 INSTALLED_APPS = [
     'django.contrib.admin',
