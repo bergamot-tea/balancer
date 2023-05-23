@@ -73,7 +73,8 @@ def balancer_view(request):
             try:
                 teams_num,teams_rates,sum_team_rates = team_balancer(teams, max_dispersion, rates)
             except:
-                pass
+                any_error = True
+                return render(request, 'index.html', {'any_error': any_error})
             else:
                 success = True
             

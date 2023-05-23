@@ -21,6 +21,7 @@
 
 
 
+ 
 
 
 
@@ -29,8 +30,7 @@
 
 
 
-
-{% if not number_teams and not success %}
+{% if not number_teams and not success and not any_error%}
 
 
 <div class="container text-center">
@@ -39,7 +39,7 @@
     <div class="col-md-center">
 	<br>
 	<br>
-      <img src="/static/img/zen/{{ zenyatta }}" class="mx-lg-auto "  height="300" alt="" loading="lazy">
+      <img src="/static/img/zen.jpg" class="mx-lg-auto "  height="300" alt="" loading="lazy">
     </div>
   </div>
   
@@ -86,7 +86,7 @@
 
 
 
-{% if number_teams and not success %}
+{% if number_teams and not success and not any_error %}
 
 <div class="container text-center">
 
@@ -283,9 +283,14 @@
           <button class="btn btn-warning mb-3" type="submit" name="button_222">
             Далее
           </button>
+		  <br>
+		  <a class="btn btn-secondary" href="https://zenyatta.ru" role="button">В начало</a>
         </p>
+		
+		
+		
       </form>
-  
+
 
 
 
@@ -316,7 +321,7 @@
 
 
 
-{% if success %}
+{% if success and not any_error%}
 
 
 <div class="container text-center">
@@ -385,7 +390,7 @@
 <br>
 
 
-<button class="btn btn-success" type="submit" onclick="history.back();">Назад</button>
+<button class="btn btn-success" type="submit" onclick="history.back();" title="Если пользовались кнопкой 'Хочу другой баланс', то нажмите 'Назад' несколько раз">Назад</button>
 <br>
 <br>
 <a class="btn btn-secondary" href="https://zenyatta.ru" role="button">В начало</a>
@@ -407,7 +412,76 @@
 
 
 </div>
+
+
 {% endif %} 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ {% if any_error %}
+
+
+<div class="container text-center">
+
+  <div class="row justify-content-md-center">
+    <div class="col-md-center">
+	<br>
+	<br>
+      <img src="/static/img/oops.jpg" class="mx-lg-auto "  height="300" alt="" loading="lazy">
+    </div>
+  </div>
+  
+  
+  <div class="row justify-content-md-center">
+
+      <div class="col-md-center">
+	  
+	  
+  <br>
+
+  
+  <div class="row row-cols-md-4 g-4 justify-content-center">
+  <div class="col-3">
+  	  <div class="card h-100" >
+  <div class="card-body">
+    <h5 class="card-title">Совет № 1</h5>
+    <p class="card-text">Нажмите "Назад" и проверьте что у вас хватает игроков с ролью танк, урон и поддержка для выбранного количества команд (например: команды три, а танка всего два)</p>
+  </div>
+</div>
+  </div>
+  <div class="col-3">
+   <div class="card h-100">
+  <div class="card-body">
+    <h5 class="card-title">Совет № 2</h5>
+    <p class="card-text">Если команд 6 и более и много игроков с несколькими ролями, попробуйте задать таким игрокам только одну роль</p>
+	
+  </div>
+</div>
+  </div>
+  </div>
+  <br>
+<button class="btn btn-success" type="submit" onclick="history.back();">Назад</button>
+<br>
+<br>
+<a class="btn btn-secondary" href="https://zenyatta.ru" role="button">В начало</a>
+<br>
+     </div>
+	 	 
+  </div>
+  
+      
+  
+</div>
+
+
+
+{% endif %} 
+
+ 
  
  
  
